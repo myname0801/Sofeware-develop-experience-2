@@ -61,16 +61,9 @@ function Bag() {
         console.log(response.data)
         } catch (error){
           console.error('Error fetching data:', error);
-        }
+        }alert("구매하셨습니다! 장바구니를 비워주세요")
         });
-      axios.delete("http://localhost:1000/bag").then((response) => {
-        try{  
-        console.log(response.data)
-        } catch (error){
-          console.error('Error fetching data:', error);
-        }
-        alert("장바구니를 비우셨습니다!")
-        });
+
   }
   return (
     <div>
