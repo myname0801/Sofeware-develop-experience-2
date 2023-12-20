@@ -14,8 +14,7 @@ function Homemenu(){
 
     return(
         <div>
-            <Sold/>
-            <h2>대표메뉴</h2>
+            <h2>메뉴</h2>
             <button name="Coffee" onClick={Clickid}>Coffee</button> <nbsp/>
             <button name="NCoffee" onClick={Clickid}>Non-Coffee</button> <nbsp/>
             <button name="Food" onClick={Clickid}>Food</button> <nbsp/> 

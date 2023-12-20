@@ -1,10 +1,30 @@
+@font-face {
+  font-family: 'JalnanGothic';
+  src: url(JalnanGothicTTF.ttf) ;
+  font-weight: normal;
+  font-style: normal;
+  color: #000000;
+}
+
+@font-face {
+  font-family: 'Jalnan2';
+  src: url(Jalnan2TTF.ttf) ;
+  font-weight: normal;
+  font-style: normal;
+  color: #000000;
+}
+
+*{
+  font-family: 'JalnanGothic';
+}
+
 body {
   padding: 20px;
 }
 
 .App {
   margin: 0 auto;
-  width: 300px;
+  width: 350px;
 }
 
 .App > div {
@@ -13,4 +33,13 @@ body {
   border: 1px solid white;
   border-radius: 5px;
   margin-bottom: 10px;
+}
+
+.App > button{
+    border-radius: 10px;
+    border-color: Black;
+    background-color: white;
+    color: black;
+    padding: 5px;
+    font-family: 'JalnanGothic';
 }

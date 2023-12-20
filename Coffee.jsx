@@ -8,7 +8,7 @@ function Coffee(){
         setText(e.target.name)
     }
     return(
-        <div>
+        <div className="blank">
             <br/>
             <button name="에스프레소"onClick={Clickid}>에스프레소</button><br/>
             {text === "에스프레소" && <Menu text ={"Espresso"}/>}
