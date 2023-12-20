@@ -206,9 +206,22 @@ app.delete('/bag', (req, res) => { //장바구니 비우기
 })
 
 app.put('/bag', (req, res) => { //장바구니 총 가격
-  const Pricesum = "INSERT INTO 고객 (고객아이디, 구매총액)"
-
+  const Pricesum = ""
   db.query(Pricesum, (err, result) =>{
+      try {
+      res.send(result);
+      console.log(result);
+      } catch (err) {
+      console.log(err)
+      }
+  })
+})
+
+app.delete('/baginto', (req, res)=>{
+  const menusold = `INSERT INTO 주문메뉴 (고객아이디, 메뉴이름, 수량, 가격, 총구매금액)
+  SELECT '주환', Name AS 메뉴이름, Count AS 수량, Price AS 가격, totalprice as 총구매금액
+  FROM 바구니;`
+  db.query(menusold, (err, result) =>{
       try {
       res.send(result);
       console.log(result);
@@ -497,73 +510,19 @@ app.get('/sold', (req, res) => {
 
 //#region
 
-app.get('/Review', (req, res) => {
-  const sql = "select 주문날짜, 메뉴이름, 수량 from 주문메뉴"
-  db.query(sql, (err, result) => {
-    if (err) {
-      console.error('Error executing MySQL query:', err);
-      res.status(500).send('Internal Server Error');
-    } else {
+app.get('/history', (req, res)=>{
+  const sql = "select 주문날짜, 메뉴이름, 수량, 가격, 총구매금액 from 주문메뉴"
+  db.query(sql, (err, result)=>{
+    if(err){
+      console.error('Error',err)
+      res.status(500).send('Error')
+    } else{
       res.json(result);
     }
-  });
-});
+  })
+})
 
-app.post('/Review5', (req, res) => {
-  const sql = "update 주문메뉴 set 평점 = '5 where 주문기록 = 5'"
-  db.query(sql, (err, result) => {
-    if (err) {
-      console.error('Error executing MySQL query:', err);
-      res.status(500).send('Internal Server Error');
-    } else {
-      res.json(result);
-    }
-  });
-});
-app.post('/Review4.5', (req, res) => {
-  const sql = "update 주문메뉴 set 평점 = '4.5' where 주문기록 = 5"
-  db.query(sql, (err, result) => {
-    if (err) {
-      console.error('Error executing MySQL query:', err);
-      res.status(500).send('Internal Server Error');
-    } else {
-      res.json(result);
-    }
-  });
-});
-app.post('/Review4', (req, res) => {
-  const sql = "update 주문메뉴 set 평점 = '4' where 주문기록 = 5"
-  db.query(sql, (err, result) => {
-    if (err) {
-      console.error('Error executing MySQL query:', err);
-      res.status(500).send('Internal Server Error');
-    } else {
-      res.json(result);
-    }
-  });
-});
-app.post('/Review42', (req, res) => {
-  const sql = "update 주문메뉴 set 평점 = '5' where 주문기록 = 6"
-  db.query(sql, (err, result) => {
-    if (err) {
-      console.error('Error executing MySQL query:', err);
-      res.status(500).send('Internal Server Error');
-    } else {
-      res.json(result);
-    }
-  });
-});
-app.post('/Review43', (req, res) => {
-  const sql = "update 주문메뉴 set 평점 = '4.5' where 주문기록 = 6"
-  db.query(sql, (err, result) => {
-    if (err) {
-      console.error('Error executing MySQL query:', err);
-      res.status(500).send('Internal Server Error');
-    } else {
-      res.json(result);
-    }
-  });
-});
+
 app.listen(port, () => { //콘솔창에 정상실행시 표시할거
     console.log(`서버 실행중 on http://localhost:${port}`)
 })
